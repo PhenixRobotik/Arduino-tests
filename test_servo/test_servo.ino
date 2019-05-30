@@ -1,21 +1,25 @@
 #include <Servo.h>
 
-Servo central,right,left;
+Servo big, small, balec;
 
 int l_min=140,l_max=164,r_min=54,r_max=24,c_min=0,c_max=180;
+
+int small_r=55, small_c=95,small_l=125;
+int big_r=30, big_c=70, big_l=100;
 
 byte r;
 
 void setup() {
   Serial.begin(115200);
   
-  central.attach(11);
-  left.attach(10);
-  right.attach(9);
+  small.attach(11);
+  balec.attach(10);
+  big.attach(9);
 
-  central.write(c_min);
-  left.write(l_min);
-  right.write(r_min);
+  balec.write(75);
+  
+  big.write(big_c);
+  small.write(small_c);
   Serial.println("Ready");
 }
 
@@ -24,30 +28,25 @@ void loop() {
   if (Serial.available() > 0)
   {
     r=Serial.read();
-    if(r=='c')
+    if(r=='r')
     {
-      central.write(c_min);
+      big.write(big_r);
+      delay(200);
+      small.write(small_r);
     }
-    else if(r=='C')
+    else if(r=='c')
     {
-      central.write(c_max);
-    }
-    else if(r=='r')
-    {
-      right.write(r_min);
-    }
-    else if(r=='R')
-    {
-      right.write(r_max);
+      small.write(small_c);
+      delay(200);
+      big.write(big_c);
     }
     else if(r=='l')
     {
-      left.write(l_min);
+      small.write(small_l);
+      delay(200);
+      big.write(big_l);
     }
-    else if(r=='L')
-    {
-      left.write(l_max);
-    } 
+
   }
   delay(1);
 }

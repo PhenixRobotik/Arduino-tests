@@ -6,6 +6,7 @@ int l_min=140,l_max=164,r_min=54,r_max=24,c_min=0,c_max=180;
 
 int small_r=55, small_c=95,small_l=125;
 int big_r=30, big_c=70, big_l=100;
+int goldemort_in=0,goldemort_out=125;
 
 byte r;
 
@@ -16,7 +17,7 @@ void setup() {
   balec.attach(10);
   big.attach(9);
 
-  balec.write(75);
+  balec.write(goldemort_in);
   
   big.write(big_c);
   small.write(small_c);
@@ -46,7 +47,14 @@ void loop() {
       delay(200);
       big.write(big_l);
     }
-
+    else if (r=='g')
+    {
+      balec.write(goldemort_in);
+    }
+    else if (r=='G')
+    {
+      balec.write(goldemort_out);
+    }
   }
   delay(1);
 }
